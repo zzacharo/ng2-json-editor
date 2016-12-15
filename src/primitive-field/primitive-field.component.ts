@@ -29,7 +29,7 @@ import {
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
+import { hookComponentDecorator } from '../shared/decorators';
 import {
   AppGlobalsService,
   ComponentTypeService,
@@ -69,6 +69,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.schema = this.schema || {};
   }
 
+  @hookComponentDecorator(() => {})
   commitValueChange() {
     // Validation
     if (this.schema['type'] === 'string' && this.schema['enum'] === undefined) {
