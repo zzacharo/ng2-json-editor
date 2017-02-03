@@ -64,4 +64,17 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
       this.tabIndexService.sortAndSynchronizeTabIndexes();
     });
   }
+  // TODO: Check https://github.com/akserg/ng2-dnd
+  drag(ev, oldIndex) {
+    ev.dataTransfer.setData('text', JSON.stringify({oldIndex}));
+  }
+
+  drop(ev, index) {
+    let {oldIndex} = JSON.parse(ev.dataTransfer.getData('text'));
+    this.reorderElement(oldIndex, index);
+  }
+
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
 }

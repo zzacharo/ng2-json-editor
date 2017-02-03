@@ -79,4 +79,12 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     return `${this.pathString}.${index}`;
   }
 
+  reorderElement(oldIndex: number, newIndex: number) {
+    let temp = this.values.get(oldIndex);
+    this.values = this.values
+    .remove(oldIndex)
+    .insert(newIndex, temp);
+    this.jsonStoreService.setIn(this.path, this.values);
+  }
+
 }
